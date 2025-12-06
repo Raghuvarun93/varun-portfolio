@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vaddi Raghu Varun | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-2: #0b1020;
+      --accent: #7c3aed;
+      --accent-soft: rgba(124,58,237,0.15);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --card: rgba(15,23,42,0.8);
+      --border: rgba(148,163,184,0.35);
+      --card-light: #f9fafb;
+      --text-dark: #111827;
+    }
+    * {box-sizing: border-box;margin: 0;padding: 0;}
+    html {scroll-behavior: smooth;}
+    body {
+      font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at top, #1d2340 0, #050816 45%, #020617 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    a {color: inherit;text-decoration: none;}
+
+    /* Navbar */
+    .nav {
+      position: fixed;top: 0;left: 0;right: 0;z-index: 50;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to right, rgba(15,23,42,0.9), rgba(15,23,42,0.78));
+      border-bottom: 1px solid var(--border);
+      display: flex;align-items: center;justify-content: space-between;
+      padding: 0.9rem 6vw;
+    }
+    .nav-title {font-weight: 600;letter-spacing: 0.08em;font-size: 0.9rem;text-transform: uppercase;color: var(--muted);}
+    .nav-links {display: flex;gap: 1.4rem;font-size: 0.85rem;flex-wrap: wrap;}
+    .nav-links a {position: relative;color: var(--muted);}
+    .nav-links a::after {
+      content: "";position: absolute;left: 0;bottom: -4px;width: 0;height: 2px;border-radius: 999px;background: linear-gradient(90deg,#a855f7,#22c55e);
+      transition: width 0.25s ease;
+    }
+    .nav-links a:hover {color: var(--text);} 
+    .nav-links a:hover::after {width: 100%;}
+
+    /* Layout helpers */
+    section {padding: 5rem 6vw 4rem;max-width: 1150px;margin: 0 auto;position: relative;}
+    section:nth-of-type(odd) {margin-top: 0.5rem;}
+    .section-label {font-size: 0.75rem;letter-spacing: 0.2em;text-transform: uppercase;color: var(--muted);}
+    .section-title {font-size: 2rem;margin-top: 0.4rem;margin-bottom: 1.5rem;font-weight: 600;}
+
+    /* Hero */
+    .hero {display: grid;grid-template-columns: minmax(0,1.6fr) minmax(0,1.2fr);gap: 3rem;align-items: center;padding-top: 7rem;}
+    .hero-badge {display: inline-flex;align-items: center;gap: 0.4rem;padding: 0.25rem 0.7rem;border-radius: 999px;border:1px solid var(--border);background:rgba(15,23,42,0.9);font-size:0.7rem;color:var(--muted);}
+    .pulse-dot {width: 7px;height:7px;border-radius:999px;background:#22c55e;box-shadow:0 0 0 6px rgba(34,197,94,0.25);} 
+    .hero-title {font-size: 2.6rem;line-height: 1.15;margin: 1rem 0 0.7rem;font-weight: 600;}
+    .hero-highlight {background: linear-gradient(120deg,#a855f7,#22c55e);background-clip: text;-webkit-background-clip: text;color: transparent;}
+    .hero-subtitle {color: var(--muted);font-size: 0.95rem;max-width: 480px;}
+    .hero-actions {display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.6rem;}
+    .btn {
+      border-radius: 999px;padding: 0.7rem 1.5rem;font-size: 0.9rem;font-weight: 500;border:1px solid transparent;cursor:pointer;display:inline-flex;align-items:center;gap:0.5rem;transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+    .btn-primary {background: linear-gradient(130deg,#a855f7,#22c55e);color:#0b1020;box-shadow:0 12px 30px rgba(124,58,237,0.35);} 
+    .btn-primary:hover {transform:translateY(-1px);box-shadow:0 18px 40px rgba(124,58,237,0.45);} 
+    .btn-ghost {background:transparent;border-color:var(--border);color:var(--text);} 
+    .btn-ghost:hover {background:rgba(15,23,42,0.9);}    
+    .hero-meta {display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:1.8rem;font-size:0.8rem;color:var(--muted);} 
+    .hero-meta span {display:flex;align-items:center;gap:0.4rem;}
+
+    .hero-right {
+      justify-self: center;position: relative;width: 260px;height: 260px;border-radius: 999px;
+      background: radial-gradient(circle at 10% 0,#22c55e 0,transparent 45%),
+                  radial-gradient(circle at 90% 100%,#a855f7 0,transparent 55%),
+                  radial-gradient(circle at 50% 50%,#0f172a 0,#020617 65%);
+      box-shadow:0 25px 80px rgba(15,23,42,0.9);
+      overflow: hidden;border:1px solid rgba(148,163,184,0.35);
+      display:flex;align-items:center;justify-content:center;
+      animation: float 6s ease-in-out infinite;
+    }
+    .hero-ring {position:absolute;inset:14%;border-radius:999px;border:1px dashed rgba(148,163,184,0.5);border-top-color:#22c55e;border-right-color:#a855f7;animation:spin 18s linear infinite;}
+    .hero-inner {position:relative;z-index:1;text-align:center;padding:1.5rem;}
+    .hero-inner h3 {font-size:1.1rem;margin-bottom:0.4rem;}
+    .hero-inner p {font-size:0.75rem;color:var(--muted);}
+
+    @keyframes float {0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+    @keyframes spin {to{transform:rotate(360deg);}}
+
+    /* About */
+    .about {display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1.1fr);gap:2.3rem;align-items:flex-start;}
+    .about p {font-size:0.9rem;color:var(--muted);line-height:1.7;}
+    .about-highlights {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0.9rem;margin-top:0.8rem;}
+    .about-pill {border-radius:0.9rem;border:1px solid var(--border);padding:0.7rem 0.8rem;font-size:0.8rem;background:rgba(15,23,42,0.8);} 
+
+    /* Cards */
+    .grid-3 {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4rem;margin-top:1rem;}
+    .card {background:var(--card);border-radius:1.1rem;border:1px solid var(--border);padding:1.2rem 1.25rem;box-shadow:0 18px 45px rgba(15,23,42,0.9);position:relative;overflow:hidden;}
+    .card::before {content:"";position:absolute;inset:-40%;background:radial-gradient(circle at 0 0,rgba(124,58,237,0.18),transparent 55%);opacity:0;transition:opacity 0.35s ease;}
+    .card:hover::before {opacity:1;}
+    .card-title {font-size:0.95rem;margin-bottom:0.4rem;font-weight:500;}
+    .pill-row {display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:0.6rem;}
+    .pill {font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:999px;background:rgba(15,23,42,0.9);border:1px solid rgba(148,163,184,0.4);color:var(--muted);} 
+
+    /* Projects */
+    .projects-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem;}
+    .project-card {background:var(--card);border-radius:1.4rem;border:1px solid var(--border);overflow:hidden;box-shadow:0 18px 40px rgba(15,23,42,0.9);}
+    .project-media {background:linear-gradient(135deg,#22c55e,#a855f7);padding:0.9rem 0.9rem 0;border-bottom:1px solid rgba(15,23,42,0.9);}
+    .project-media-inner {border-radius:1.1rem;overflow:hidden;background:#eef2ff;}
+    .project-media-inner img {display:block;width:100%;height:auto;}
+    .project-body {padding:1.2rem 1.3rem 1.1rem;}
+    .project-tag {font-size:0.7rem;text-transform:uppercase;letter-spacing:0.16em;color:var(--muted);}
+    .project-title {font-size:1.1rem;margin:0.35rem 0 0.45rem;}
+    .project-desc {font-size:0.85rem;color:var(--muted);}
+    .project-footer {display:flex;justify-content:space-between;align-items:center;margin-top:0.9rem;font-size:0.8rem;}
+    .project-link {display:inline-flex;align-items:center;gap:0.25rem;font-size:0.8rem;color:#a855f7;}
+
+    /* Timeline (Education / Internships) */
+    .timeline {margin-top:1.4rem;border-left:1px solid var(--border);padding-left:1.4rem;position:relative;}
+    .timeline-item {margin-bottom:1.3rem;position:relative;}
+    .timeline-dot {position:absolute;left:-9px;top:4px;width:11px;height:11px;border-radius:999px;background:#a855f7;box-shadow:0 0 0 6px rgba(124,58,237,0.35);} 
+    .timeline-role {font-size:0.9rem;font-weight:500;}
+    .timeline-meta {font-size:0.75rem;color:var(--muted);margin-top:0.15rem;}
+
+    /* Certificates & Achievements */
+    .cert-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.4rem;margin-top:1rem;}
+    .cert {background:var(--card);border-radius:1.1rem;border:1px solid var(--border);padding:1rem 1.1rem;font-size:0.85rem;}
+    .cert span {display:block;font-size:0.7rem;color:var(--muted);margin-top:0.2rem;}
+
+    .ach-list {margin-top:0.9rem;list-style:none;font-size:0.86rem;color:var(--muted);}
+    .ach-list li {margin-bottom:0.45rem;position:relative;padding-left:1.3rem;}
+    .ach-list li::before {content:"★";position:absolute;left:0;font-size:0.7rem;color:#facc15;top:0.15rem;}
+
+    /* Contact */
+    .contact-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem;margin-top:1rem;}
+    .contact-card {background:var(--card-light);color:var(--text-dark);border-radius:1.6rem;border:1px solid #e5e7eb;padding:1.8rem 1.9rem;box-shadow:0 24px 60px rgba(15,23,42,0.35);}
+    .contact-card h3 {font-size:1.3rem;margin-bottom:0.4rem;color:#111827;}
+    .contact-card p {font-size:0.9rem;color:#4b5563;}
+    .contact-icons {display:flex;gap:1.1rem;margin-top:1.4rem;font-size:1.8rem;}
+    .contact-icon {width:42px;height:42px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:#eef2ff;color:#4f46e5;}
+    .contact-icon.mail {background:#fee2e2;color:#b91c1c;}
+    .contact-icon.linkedin {background:#e0edff;color:#2563eb;font-size:1.5rem;font-weight:700;}
+    .contact-icon.github {background:#e5e7eb;color:#111827;font-weight:700;font-size:1.4rem;}
+
+    .contact-form form {display:flex;flex-direction:column;gap:0.8rem;margin-top:0.8rem;}
+    .field-label {font-size:0.8rem;color:#6b7280;}
+    .field-input, .field-textarea {width:100%;padding:0.7rem 0.9rem;border-radius:0.75rem;border:1px solid #e5e7eb;font-size:0.85rem;outline:none;transition:border-color 0.15s ease, box-shadow 0.15s ease;}
+    .field-input:focus, .field-textarea:focus {border-color:#4f46e5;box-shadow:0 0 0 3px rgba(79,70,229,0.18);}    
+    .field-textarea {min-height:130px;resize:vertical;}
+    .btn-submit {margin-top:0.5rem;border-radius:999px;border:none;padding:0.8rem 1.4rem;font-size:0.9rem;font-weight:500;background:#4f46e5;color:#f9fafb;cursor:pointer;box-shadow:0 14px 35px rgba(79,70,229,0.4);}
+    .btn-submit:hover {transform:translateY(-1px);box-shadow:0 18px 45px rgba(79,70,229,0.5);} 
+
+    footer {padding:1.5rem 6vw 2rem;font-size:0.75rem;color:var(--muted);text-align:center;border-top:1px solid rgba(15,23,42,0.9);margin-top:2.5rem;}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero {grid-template-columns:1fr;gap:2.5rem;}
+      .hero-right {order:-1;margin-top:4.5rem;width:230px;height:230px;}
+      .nav {padding-inline:1.4rem;}
+    }
+    @media (max-width: 880px){
+      section {padding-inline:1.6rem;}
+      .about {grid-template-columns:1fr;}
+      .about-highlights {grid-template-columns:1fr 1fr;}
+      .grid-3 {grid-template-columns:repeat(2,minmax(0,1fr));}
+      .projects-grid {grid-template-columns:1fr;}
+      .cert-grid {grid-template-columns:1fr;}
+      .contact-grid {grid-template-columns:1fr;}
+    }
+    @media (max-width: 640px){
+      .grid-3 {grid-template-columns:1fr;}
+      .about-highlights {grid-template-columns:1fr;}
+      .nav-title {font-size:0.75rem;}
+      .hero-title {font-size:2.1rem;}
+      .nav-links {gap:0.8rem;}
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-title">VADDI RAGHU VARUN • PORTFOLIO</div>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#internships">Internships</a>
+      <a href="#certificates">Certifications</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div>
+        <div class="hero-badge"><span class="pulse-dot"></span> Data Science • Problem Solving • Analytics</div>
+        <h1 class="hero-title">Hi, I'm <span class="hero-highlight">Vaddi Raghu Varun<br> Kumar Reddy</span></h1>
+        <p class="hero-subtitle">
+          Computer Science Engineering (Data Science) student with a strong foundation in data analysis,
+          programming and project-based learning. I enjoy transforming raw data into meaningful insights
+          and building real-world solutions with technology.
+        </p>
+        <div class="hero-actions">
+          <a href="Varun_Resume.pdf" class="btn btn-primary" download>
+            Download Resume
+            <span>⬇</span>
+          </a>
+          <a href="#projects" class="btn btn-ghost">View My Work →</a>
+        </div>
+        <div class="hero-meta">
+          <span>🎓 CSE (Data Science), Vel Tech University</span>
+          <span>💻 Python • C • Java • JavaScript (Basic)</span>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-ring"></div>
+        <div class="hero-inner">
+          <h3>Emerging Data Analyst</h3>
+          <p>
+            Exploring data science, deep learning and web technologies while
+            building projects that connect concepts to real-world impact.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <p class="section-label">Profile</p>
+      <h2 class="section-title">About Me</h2>
+      <div class="about">
+        <div>
+          <p>
+            I am an aspiring Data Science engineer passionate about using data, programming and
+            problem-solving to build practical solutions. I enjoy working end-to-end on projects,
+            from understanding the problem and exploring data to developing models and presenting
+            insights in a clear way.
+          </p>
+          <p style="margin-top:0.7rem;">
+            My interests include data analytics, deep learning based applications, and modern web
+            interfaces for visualizing results. I am actively building my skills through projects,
+            NPTEL courses, internships and online programs.
+          </p>
+        </div>
+        <div>
+          <div class="about-highlights">
+            <div class="about-pill">B.Tech CSE (Data Science)<br><span style="font-size:0.75rem;color:var(--muted);">Vel Tech University, Chennai</span></div>
+            <div class="about-pill">Programming Stack<br><span style="font-size:0.75rem;color:var(--muted);">Python, C, Java, JavaScript (Basic)</span></div>
+            <div class="about-pill">Focus Areas<br><span style="font-size:0.75rem;color:var(--muted);">Data Analysis, Deep Learning, Web</span></div>
+            <div class="about-pill">Soft Skills<br><span style="font-size:0.75rem;color:var(--muted);">Teamwork, Communication, Problem Solving</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+      <p class="section-label">Core Profile</p>
+      <h2 class="section-title">Skills & Tools</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3 class="card-title">Programming</h3>
+          <p style="font-size:0.82rem;color:var(--muted);">Writing clean, structured code to solve real-world problems.</p>
+          <div class="pill-row">
+            <span class="pill">Python</span>
+            <span class="pill">C</span>
+            <span class="pill">Java</span>
+            <span class="pill">JavaScript (Basic)</span>
+            <span class="pill">OOP Concepts</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Data & Analytics</h3>
+          <p style="font-size:0.82rem;color:var(--muted);">Working with data to derive patterns, trends and insights.</p>
+          <div class="pill-row">
+            <span class="pill">Data Analysis</span>
+            <span class="pill">Exploratory Data Analysis</span>
+            <span class="pill">Database Management</span>
+            <span class="pill">Microsoft Excel</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Productivity & Others</h3>
+          <p style="font-size:0.82rem;color:var(--muted);">Creating structured documents and impactful presentations.</p>
+          <div class="pill-row">
+            <span class="pill">MS PowerPoint</span>
+            <span class="pill">MS Word</span>
+            <span class="pill">Team Collaboration</span>
+            <span class="pill">Problem Solving</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+      <p class="section-label">Built With Code</p>
+      <h2 class="section-title">Projects</h2>
+      <div class="projects-grid">
+        <article class="project-card">
+          <div class="project-media">
+            <div class="project-media-inner">
+              <!-- Replace https://via.placeholder.com/800x450.png?text=Crop+Yield+Project+Screenshot with your real image path -->
+              <img src="https://i.ytimg.com/vi/GYkEU9gv1RE/maxresdefault.jpg" alt="Crop yield prediction in agriculture Illustration" />
+            </div>
+          </div>
+          <div class="project-body">
+            <p class="project-tag">Deep Learning • Data Science</p>
+            <h3 class="project-title">Deep Learning based Crop Yield Prediction Model for Optimizing Agricultural Productivity and Food Security</h3>
+            <p class="project-desc">
+              Built a neural network pipeline to analyse weather and soil factors and forecast agricultural yields.
+              This helps farmers and planners make accurate, data-driven decisions for improving productivity and
+              managing food supply risks.
+            </p>
+            <div class="project-footer">
+              <span>Technologies: Python, Deep Learning</span>
+              <span class="project-link">Repo coming soon</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-media">
+            <div class="project-media-inner">
+              <!-- Replace https://via.placeholder.com/800x450.png?text=Online+Store+Project+Screenshot with your real image path -->
+              <img src="https://s.tmimgcdn.com/scr/800x500/65300/unique-electronic-amp-digital-store-website-template_65366-original.jpg" alt="Online store website preview" />
+            </div>
+          </div>
+          <div class="project-body">
+            <p class="project-tag">Web Development</p>
+            <h3 class="project-title">Online Store Website for Unique Creations</h3>
+            <p class="project-desc">
+              A multi-page online store with homepage, login, cart and payment interface. Designed with real
+              product images and interactive UI using HTML, CSS and JavaScript to simulate a complete
+              e-commerce experience.
+            </p>
+            <div class="project-footer">
+              <span>Technologies: HTML, CSS, JavaScript</span>
+              <a class="project-link" href="https://github.com/Raghuvarun93" target="_blank" rel="noreferrer">View on GitHub ↗</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Internships Section -->
+    <section id="internships">
+      <p class="section-label">Real-World Exposure</p>
+      <h2 class="section-title">Internships & Programs</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <h3 class="timeline-role">AI Azure Intern (Remote)</h3>
+          <p class="timeline-meta">Edunet Foundation &mdash; Microsoft Internship Program | Apr 2025 – May 2025</p>
+          <p class="timeline-meta">Worked on Azure fundamentals, AI and ML concepts, including supervised/unsupervised learning and computer vision basics.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <h3 class="timeline-role">AI for Sustainability Virtual Internship</h3>
+          <p class="timeline-meta">1M1B in collaboration with IBM SkillsBuild & AICTE</p>
+          <p class="timeline-meta">6‑week immersive program focusing on Artificial Intelligence, Sustainable Development and responsible innovation.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <h3 class="timeline-role">Technical Training & Project Practice</h3>
+          <p class="timeline-meta">Workshops and guided programs on data science and software development.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+      <p class="section-label">Journey So Far</p>
+      <h2 class="section-title">Education Timeline</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <h3 class="timeline-role">B.Tech in Computer Science Engineering (Data Science)</h3>
+          <p class="timeline-meta">Vel Tech Rangarajan Dr. Sagunthala R&D Institute of Science and Technology, Chennai</p>
+          <p class="timeline-meta">CGPA: 7.8</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <h3 class="timeline-role">Intermediate (10+2)</h3>
+          <p class="timeline-meta">Sri Chaitanya Junior College, Andhra Pradesh &mdash; 92%</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <h3 class="timeline-role">Secondary School Education</h3>
+          <p class="timeline-meta">Sri Chaitanya School, Andhra Pradesh &mdash; CGPA: 9.5 / 10</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates">
+      <p class="section-label">Achievements</p>
+      <h2 class="section-title">Certificates</h2>
+      <div class="cert-grid">
+        <div class="cert">
+          <strong>NPTEL Online Certification &mdash; Remote Sensing Essentials</strong>
+          <span>Indian Institute of Technology Roorkee &bull; Jan–Apr 2025 (12-week course)</span>
+          <span>Score: 57% (Online Assignments: 25/25, Proctored Exam: 31.5/75)</span>
+          <span>Recommended Credits: 3–4</span>
+        </div>
+        <div class="cert">
+          <strong>Data Discovery: Mastering the Art of Exploratory Data Analysis</strong>
+          <span>Hands-on exposure to EDA techniques, visualisation and data storytelling.</span>
+        </div>
+        <div class="cert">
+          <strong>Demystifying Manufacturing Analytics: Navigating Industry 4.0</strong>
+          <span>Gained awareness of analytics in modern manufacturing and Industry 4.0 concepts.</span>
+        </div>
+        <div class="cert">
+          <strong>Other College & Online Certifications</strong>
+          <span>Continuous learning through workshops, webinars and short-term programs.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements">
+      <p class="section-label">Highlights</p>
+      <h2 class="section-title">Achievements & Activities</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3 class="card-title">National Service Scheme (NSS)</h3>
+          <p style="font-size:0.85rem;color:var(--muted);">
+            Active NSS volunteer at Vel Tech University, contributing to social service, awareness
+            campaigns and community development activities.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Academic Performance</h3>
+          <ul class="ach-list">
+            <li>B.Tech CSE (Data Science) with CGPA 7.8</li>
+            <li>Intermediate score of 92%</li>
+            <li>Secondary school CGPA 9.5/10</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Learning Mindset</h3>
+          <ul class="ach-list">
+            <li>Completing long-term NPTEL course alongside academics.</li>
+            <li>Participating in multiple data and analytics focused workshops.</li>
+            <li>Building projects to connect theory with real-world outcomes.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <p class="section-label">Get in Touch</p>
+      <h2 class="section-title">Contact</h2>
+      <div class="contact-grid">
+        <!-- Left: Contact Information -->
+        <div class="contact-card">
+          <h3>Contact Information</h3>
+          <p>You can reach me via these platforms:</p>
+          <div class="contact-icons">
+            <div class="contact-icon">📞</div>
+            <div class="contact-icon mail">✉️</div>
+            <a href="https://www.linkedin.com/in/vaddi-raghu-varun-a87548373" target="_blank" rel="noreferrer" class="contact-icon linkedin">in</a>
+            <a href="https://github.com/Raghuvarun93" target="_blank" rel="noreferrer" class="contact-icon github">GH</a>
+          </div>
+          <div style="margin-top:1.4rem;font-size:0.85rem;color:#4b5563;">
+            <div><strong>Phone:</strong> +91 9398018136</div>
+            <div><strong>Email:</strong> vaddiraghuvarun91@gmail.com</div>
+          </div>
+        </div>
+
+        <!-- Right: Contact Form -->
+        <div class="contact-card contact-form">
+          <h3>Send a Message</h3>
+          <p>Have an opportunity, project idea or question? Drop a message here.</p>
+          <form action="mailto:vaddiraghuvarun91@gmail.com" method="post" enctype="text/plain">
+            <div>
+              <div class="field-label">Your Name</div>
+              <input class="field-input" type="text" name="name" placeholder="Your Name" required />
+            </div>
+            <div>
+              <div class="field-label">Your Email</div>
+              <input class="field-input" type="email" name="email" placeholder="your@email.com" required />
+            </div>
+            <div>
+              <div class="field-label">Your Message</div>
+              <textarea class="field-textarea" name="message" placeholder="Write your message..."></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Vaddi Raghu Varun Kumar Reddy · Designed & coded portfolio.
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
